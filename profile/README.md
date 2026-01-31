@@ -55,7 +55,7 @@ graph TD
 
 ---
 
-## 👥 Contributors
+## Contributors
 - **[김경영](https://github.com/rudduddl)**: 전체 시스템 설계, API Gateway 구축, Auth/Health Service 개발
 
 
