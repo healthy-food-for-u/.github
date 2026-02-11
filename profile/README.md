@@ -1,5 +1,5 @@
 # Healthy Food For U (헬스포유)
-
+> 🥗 서비스 주소 : https://healthforu.co.kr<br>
 > 사용자의 질환 정보를 바탕으로 안전한 맞춤형 레시피를 제안하는 MSA 기반 헬스케어 서비스입니다.
 
 ## System Architecture
