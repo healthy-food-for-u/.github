@@ -3,6 +3,7 @@
 > 사용자의 질환 정보를 바탕으로 안전한 맞춤형 레시피를 제안하는 MSA 기반 헬스케어 서비스입니다.
 
 ## System Architecture
+
 ```mermaid
 graph TD
     subgraph "Client Side"
@@ -14,6 +15,11 @@ graph TD
     
     subgraph "Infrastructure"
         GW -->|Auth Validation| JWT[JWT Filter]
+        subgraph "Search & Monitoring"
+            ES[(Elasticsearch)]
+            KB[Kibana]
+            ES --- KB
+        end
     end
 
     subgraph "Microservices"
@@ -24,15 +30,19 @@ graph TD
     subgraph "Persistence Layer"
         Auth --> Redis[(Redis: Token/Blacklist)]
         Health --> MongoDB[(MongoDB Atlas: Recipe/Disease)]
+        Health -.->|Indexing| ES
     end
 
     Health -->|Fetch Data| OpenAPI((식품안전나라 API))
+    ES -.->|Search Query| Health
 
     %% 스타일 정의
     style GW fill:#42b883,stroke:#333,color:#fff
     style FE fill:#f9f,stroke:#333
     style Auth fill:#bbf,stroke:#333
     style Health fill:#bbf,stroke:#333
+    style ES fill:#f5cc62,stroke:#333
+    style KB fill:#f5cc62,stroke:#333
 
 ```
 
@@ -40,7 +50,7 @@ graph TD
 - **Language:** Java 21
 - **Framework:** Spring Boot, Spring Cloud Gateway
 - **Frontend:** Vue 3, Vite, Pinia, Axios
-- **Database:** MongoDB Atlas, Redis
+- **Database & Search:** MongoDB Atlas, Redis, Elasticsearch, Kibana
 - **Security:** JWT, Spring Security
 - **DevOps:** Maven, Spring Cloud Config
 
